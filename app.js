@@ -190,6 +190,27 @@ app.post('/compose-message', (req, res) => {
 });
 
 
+// Route to update student information
+app.put('/student/:register_number', (req, res) => {
+    console.log('Request Body:', req.body); // Log the request body
+    const register_number = req.params.register_number;
+    const { email_id, full_name, department, admission_year, bus_from, bus_number, pass_status, amount_paid, paid_on, pass_expires_on, dob } = req.body;
+  db.query(
+      'UPDATE student SET email_id = ?, full_name = ?, department = ?, admission_year = ?, bus_from = ?, bus_number = ?, pass_status = ?, amount_paid = ?, paid_on = ?, pass_expires_on = ?, `dob` = ? WHERE register_number = ?',
+      [email_id, full_name, department, admission_year, bus_from, bus_number, pass_status, amount_paid, paid_on, pass_expires_on, dob, register_number],
+      (error, results) => {
+          if (error) {
+              console.error('Error updating student:', error);
+              res.status(500).send('Error updating student');
+          } else {
+              res.status(200).send('Student updated successfully');
+          }
+      }
+  );
+});
+
+
+
 
 
 
