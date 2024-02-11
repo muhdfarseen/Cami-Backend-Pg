@@ -270,7 +270,6 @@ app.get('/delivered-messages/:admission_year/:department', (req, res) => {
 
 
 
-
 server.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
