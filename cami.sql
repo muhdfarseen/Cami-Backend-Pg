@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 11, 2024 at 04:17 PM
+-- Generation Time: Feb 12, 2024 at 09:39 AM
 -- Server version: 11.2.2-MariaDB
 -- PHP Version: 8.0.30
 
@@ -67,7 +67,9 @@ CREATE TABLE `message` (
 
 INSERT INTO `message` (`msg_id`, `subject`, `description`, `sent_time`, `rec-year`, `rec-dept`) VALUES
 (3, 'hello', 'asdasdasdas', '2024-02-11 09:34:21', '[\"All\"]', '[\"All\"]'),
-(4, 'Hello World', 'This is a sample message to IT 2024', '2024-02-11 09:35:06', '[\"2024\"]', '[\"IT\"]');
+(4, 'Hello World', 'This is a sample message to IT 2024', '2024-02-11 09:35:06', '[\"2024\"]', '[\"IT\"]'),
+(6, 'world', 'asdas', '2024-02-11 17:34:49', '[\"2024\"]', '[\"All\"]'),
+(7, 'asda', 'asdas', '2024-02-11 17:35:06', '[\"2020\"]', '[\"All\"]');
 
 -- --------------------------------------------------------
 
@@ -101,7 +103,9 @@ INSERT INTO `student` (`register_number`, `email_id`, `full_name`, `department`,
 ('2022017', 'amelia.king@example.com', 'Amelia King', 'Mechanical Engineering', '2022', 'Campus', 5, 1, '130', '2023-05-14', '2023-11-14', '123'),
 ('2022018', 'matthew.scott@example.com', 'Matthew Scott', 'Civil Engineering', '2022', 'Campus', 6, 1, '110', '2023-05-19', '2023-11-19', '123'),
 ('2022019', 'charlotte.allen@example.com', 'Charlotte Allen', 'Chemical Engineering', '2022', 'Campus', 1, 1, '105', '2023-06-04', '2023-12-04', '123'),
-('2022020', 'mia.young@example.com', 'Mia Young', 'Aerospace Engineering', '2022', 'Campus', 2, 1, '115', '2023-06-09', '2023-12-09', '123');
+('2022020', 'mia.young@example.com', 'Mia Young', 'Aerospace Engineering', '2022', 'Campus', 2, 1, '115', '2023-06-09', '2023-12-09', '123'),
+('TLY20IT037', 'asd@gmail.con', 'Farseen T P', 'IT', '2023', 'Knr Stand', 3, 1, '13000', '2024-01-25', '2024-02-08', '22/07/2002'),
+('TLY20IT038', 'helo@gmail.com', 'Muhammed Farseen T P', 'IT', '2020', 'ADSAS', 4, 1, '13223', '2024-02-16', '2024-02-20', '22/07/2002');
 
 --
 -- Indexes for dumped tables
@@ -134,7 +138,7 @@ ALTER TABLE `student`
 -- AUTO_INCREMENT for table `message`
 --
 ALTER TABLE `message`
-  MODIFY `msg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `msg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -12,11 +12,11 @@ app.use(express.json());
 const server = http.createServer(app);
 
 const db = mysql.createConnection({
-  host: 'localhost',
+  host: 'bnlqvl6nsimavq6mjgpm-mysql.services.clever-cloud.com',
   port: 3306,
-  user: 'root',
-  password: '',
-  database: 'cami'
+  user: 'uiwzc9ro5m2tlko9',
+  password: 'QBwhJpP459weq7kVJMLI',
+  database: 'bnlqvl6nsimavq6mjgpm'
 });
 
 
@@ -181,13 +181,13 @@ app.post('/compose-message', (req, res) => {
 });
 
 // Route to update student information
-app.put('/student/:register_number', (req, res) => {
-  console.log('Request Body:', req.body); // Log the request body
-  const register_number = req.params.register_number;
-  const { email_id, full_name, department, admission_year, bus_from, bus_number, pass_status, amount_paid, paid_on, pass_expires_on, dob } = req.body;
+app.put('/student/:older_register_number', (req, res) => {
+  console.log('Request Body:', req.body); 
+  const old_register_number = req.params.older_register_number;
+  const { register_number, email_id, full_name, department, admission_year, bus_from, bus_number, pass_status, amount_paid, paid_on, pass_expires_on, dob } = req.body;
   db.query(
-    'UPDATE student SET email_id = ?, full_name = ?, department = ?, admission_year = ?, bus_from = ?, bus_number = ?, pass_status = ?, amount_paid = ?, paid_on = ?, pass_expires_on = ?, `dob` = ? WHERE register_number = ?',
-    [email_id, full_name, department, admission_year, bus_from, bus_number, pass_status, amount_paid, paid_on, pass_expires_on, dob, register_number],
+    'UPDATE student SET register_number= ?, email_id = ?, full_name = ?, department = ?, admission_year = ?, bus_from = ?, bus_number = ?,pass_status = ?, amount_paid = ?, paid_on = ?, pass_expires_on = ?, `dob` = ? WHERE register_number = ?',
+    [register_number, email_id, full_name, department, admission_year, bus_from, bus_number, pass_status, amount_paid, paid_on, pass_expires_on, dob, old_register_number],
     (error, results) => {
       if (error) {
         console.error('Error updating student:', error);
@@ -198,6 +198,7 @@ app.put('/student/:register_number', (req, res) => {
     }
   );
 });
+
 
 //----------------------------------------------------------Student APP
 
