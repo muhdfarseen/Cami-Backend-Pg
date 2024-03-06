@@ -1,8 +1,8 @@
 const express = require("express");
-const { Pool } = require('pg')
+const { Pool } = require('pg');
 const cors = require("cors");
 const http = require("http");
-require('dotenv').config()
+require('dotenv').config();
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -13,8 +13,25 @@ app.use(express.json());
 const server = http.createServer(app);
 
 const pool = new Pool({
-  connectionString: "postgres://default:9qNYOR3LmDUk@ep-mute-king-a4eykk29-pooler.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require",
+  connectionString: "postgres://default:Fe36EZguRqTd@ep-lingering-scene-a43952jd-pooler.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require",
 })
+
+// const pool = new Pool({
+//   user: "cami",
+//   host: "postgres://cami:aMOzkMLag3hjKB0UeCyI8rHGtitYxIbv@dpg-cnk32t5jm4es73en83lg-a/camipgsql",
+//   database:"camipgsql",
+//   password: "aMOzkMLag3hjKB0UeCyI8rHGtitYxIbv",
+//   port: 5432,
+//   ssl: {
+//     rejectUnauthorized: false 
+//   }
+// });
+
+pool.connect((err) => {
+  if (err) throw err
+  console.log("connect to db")
+});
+
 
 //----------------------------------------------------------Driver APP
 
