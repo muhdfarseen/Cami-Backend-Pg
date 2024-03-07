@@ -1,8 +1,8 @@
 const express = require("express");
-const { Pool } = require('pg');
+const { Pool } = require("pg");
 const cors = require("cors");
 const http = require("http");
-require('dotenv').config();
+require("dotenv").config();
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -13,8 +13,9 @@ app.use(express.json());
 const server = http.createServer(app);
 
 const pool = new Pool({
-  connectionString: "postgres://default:Fe36EZguRqTd@ep-lingering-scene-a43952jd-pooler.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require",
-})
+  connectionString:
+    "postgres://default:Fe36EZguRqTd@ep-lingering-scene-a43952jd-pooler.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require",
+});
 
 // const pool = new Pool({
 //   user: "cami",
@@ -23,15 +24,14 @@ const pool = new Pool({
 //   password: "aMOzkMLag3hjKB0UeCyI8rHGtitYxIbv",
 //   port: 5432,
 //   ssl: {
-//     rejectUnauthorized: false 
+//     rejectUnauthorized: false
 //   }
 // });
 
 pool.connect((err) => {
-  if (err) throw err
-  console.log("connect to db")
+  if (err) throw err;
+  console.log("connect to db");
 });
-
 
 //----------------------------------------------------------Driver APP
 
@@ -289,11 +289,15 @@ app.post("/login", (req, res) => {
 app.get("/delivered-messages/:admission_year/:department", (req, res) => {
   const { admission_year, department } = req.params;
 
-  // Query the database to fetch messages that match the user's admission year and department,
-  // as well as messages intended for all users
+  // Query the database to fetch messages that match the user's admission year and department
   pool.query(
-    "SELECT * FROM message WHERE (description->>'rec-year' = $1 OR description->>'rec-year' = '[\"All\"]') AND (description->>'rec-dept' = $2 OR description->>'rec-dept' = '[\"All\"]')",
-    [JSON.stringify(admission_year), JSON.stringify(department)],
+    `SELECT * FROM message 
+    WHERE 
+        ($1 IN (SELECT json_array_elements_text(CAST("rec-year" AS JSON))) OR 'All' IN (SELECT json_array_elements_text(CAST("rec-year" AS JSON))))
+        AND 
+        ($2 IN (SELECT json_array_elements_text(CAST("rec-dept" AS JSON))) OR 'All' IN (SELECT json_array_elements_text(CAST("rec-dept" AS JSON))));
+    `,
+    [admission_year, department],
     (error, results) => {
       if (error) {
         console.error("Error fetching messages:", error);
